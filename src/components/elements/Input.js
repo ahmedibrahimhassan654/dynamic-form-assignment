@@ -22,6 +22,7 @@ const Input = ({
         value={field_value}
         required={field_mandatory === "yes" ? true : false}
         onChange={(event) => handleChange(field_id, event)}
+        
       />
     </div>
   );
