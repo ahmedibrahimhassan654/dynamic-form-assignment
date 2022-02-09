@@ -14,17 +14,13 @@ function App() {
   const { page_label, fields } = elements ?? {};
   return (
     <>
-      {JSON.stringify(elements)}
-
       <div className="App container mt-5 ">
+        <h1>{page_label}</h1>
         <div className="col-md-6">
           <form>
             {fields
               ? fields.map((field, i) => <Element key={i} field={field} />)
               : ""}
-            {/* <Input />
-            <Select />
-            <CheckBox /> */}
             <button type="submit" className="btn btn-primary mt-5">
               Submit
             </button>

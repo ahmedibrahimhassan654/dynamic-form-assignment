@@ -37,7 +37,14 @@ const Element = ({
         />
       );
     case "checkbox":
-      return <CheckBox />;
+      return (
+        <CheckBox
+          field_id={field_id}
+          field_label={field_label}
+           field_value={field_value}
+          field_mandatory={field_mandatory}
+        />
+      );
 
     default:
       return null;
