@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 
 import Element from "./components/Element";
-import CheckBox from "./components/elements/CheckBox";
-import Input from "./components/elements/Input";
-import Select from "./components/elements/Select";
+import { FormContext } from "./FormContext";
+
 import formJSON from "./formElement.json";
 
 function App() {
@@ -12,22 +11,53 @@ function App() {
     setElements(formJSON[0]);
   }, []);
   const { page_label, fields } = elements ?? {};
+
+  const handleSubmit = () => {
+    console.log(elements);
+  };
+
+  const handleChange = (id, event) => {
+    const newElements = { ...elements };
+
+    newElements.fields.forEach((field) => {
+      const { field_id, field_type, field_value } = field;
+
+      if (id === field_id) {
+        switch (field_type) {
+          case "checkbox":
+            field["field_value"] = event.target.checked;
+
+            break;
+
+          default:
+            field["field_value"] = event.target.value;
+
+            break;
+        }
+      }
+      setElements(newElements);
+    });
+    console.log("new elements", elements);
+  };
+
   return (
-    <>
-      <div className="App container mt-5 ">
-        <h1>{page_label}</h1>
-        <div className="col-md-6">
-          <form>
-            {fields
-              ? fields.map((field, i) => <Element key={i} field={field} />)
-              : ""}
-            <button type="submit" className="btn btn-primary mt-5">
-              Submit
-            </button>
-          </form>
+    <FormContext.Provider value={{ handleChange }}>
+      <>
+        <div className="App container mt-5 ">
+          <h1>{page_label}</h1>
+          <div className="col-md-6">
+            <form>
+              {fields
+                ? fields.map((field, i) => <Element key={i} field={field} />)
+                : ""}
+              <button type="submit" className="btn btn-primary mt-5">
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
-    </>
+      </>
+    </FormContext.Provider>
   );
 }
 
