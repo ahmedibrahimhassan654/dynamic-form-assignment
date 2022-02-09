@@ -12,15 +12,16 @@ function App() {
   }, []);
   const { page_label, fields } = elements ?? {};
 
-  const handleSubmit = () => {
-    console.log(elements);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("handle submit happen", elements);
   };
 
   const handleChange = (id, event) => {
     const newElements = { ...elements };
 
     newElements.fields.forEach((field) => {
-      const { field_id, field_type, field_value } = field;
+      const { field_id, field_type } = field;
 
       if (id === field_id) {
         switch (field_type) {
@@ -50,7 +51,11 @@ function App() {
               {fields
                 ? fields.map((field, i) => <Element key={i} field={field} />)
                 : ""}
-              <button type="submit" className="btn btn-primary mt-5">
+              <button
+                type="submit"
+                className="btn btn-primary mt-5"
+                onClick={(e) => handleSubmit(e)}
+              >
                 Submit
               </button>
             </form>
