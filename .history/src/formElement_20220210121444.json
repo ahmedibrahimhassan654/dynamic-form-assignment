@@ -3,13 +3,9 @@
     "page_label": "Job Application Form",
     "fields": [
       {
-        "field_id": "english_name",
-        "field_label": "Name",
-        "field_mandatory": "yes",
-        "field_placeholder": "Enter name",
-        "field_type": "text",
-        "field_value": ""
-      },
+        
+      }
+      ,
 
       {
         "field_id": "email",
