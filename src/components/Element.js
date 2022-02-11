@@ -12,6 +12,7 @@ const Element = ({
     field_value,
     field_mandatory,
     field_options,
+    formLang,
   },
 }) => {
   switch (field_type) {
@@ -23,6 +24,7 @@ const Element = ({
           field_placeholder={field_placeholder}
           field_value={field_value}
           field_mandatory={field_mandatory}
+          formLang={formLang}
         />
       );
     case "select":
@@ -34,6 +36,7 @@ const Element = ({
           field_value={field_value}
           field_mandatory={field_mandatory}
           field_options={field_options}
+          formLang={formLang}
         />
       );
     case "checkbox":
@@ -41,8 +44,9 @@ const Element = ({
         <CheckBox
           field_id={field_id}
           field_label={field_label}
-           field_value={field_value}
+          field_value={field_value}
           field_mandatory={field_mandatory}
+          formLang={formLang}
         />
       );
 

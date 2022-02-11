@@ -3,12 +3,13 @@ import { getSingleForm } from "./Api/forms";
 
 import Element from "./components/Element";
 import { FormContext } from "./FormContext";
-import formJSON from "./formElement.json";
+// import formJSON from "./formElement.json";
 
 function App() {
   const [elements, setElements] = useState(null);
 
   const [formId, setFormId] = useState("62054f4b1359de293fe8e149");
+  const [formLang, setformLang] = useState("eng");
 
   useEffect(() => {
     try {
@@ -58,10 +59,22 @@ function App() {
         <div className="App container mt-5 ">
           <h1>{page_label}</h1>
           <h2>Form Language is {form_language}</h2>
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            onChange={(e) => {
+              setformLang(e.target.value);
+            }}
+          >
+            <option selected>edit form language</option>
+            <option value="eng">English</option>
+            <option value="ara">Arabic</option>
+          </select>
+          {JSON.stringify(formLang)}
           <div className="col-md-6">
             <form>
               {fields
-                ? fields.map((field, i) => <Element key={i} field={field} />)
+                ? fields.map((field, i) => <Element key={i} field={field} formLang={formLang}/>)
                 : ""}
               <button
                 type="submit"
