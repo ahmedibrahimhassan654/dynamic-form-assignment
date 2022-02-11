@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { getSingleForm } from "./Api/forms";
 
 import Element from "./components/Element";
 import { FormContext } from "./FormContext";
@@ -8,20 +7,12 @@ import formJSON from "./formElement.json";
 function App() {
   const [elements, setElements] = useState(null);
 
-  const [formId, setFormId] = useState("62054f4b1359de293fe8e149");
+
 
   useEffect(() => {
-    try {
-      getSingleForm(formId).then((res) => {
-        console.log(res.data.data);
-        setElements(res.data.data);
-      });
-    } catch (err) {
-      console.log(err);
-    }
-    // setElements(formJSON[0]);
-  }, [formId]);
-  const { page_label, fields, form_language } = elements ?? {};
+    setElements(formJSON[0]);
+  }, []);
+  const { page_label, fields } = elements ?? {};
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -57,7 +48,6 @@ function App() {
       <>
         <div className="App container mt-5 ">
           <h1>{page_label}</h1>
-          <h2>Form Language is {form_language}</h2>
           <div className="col-md-6">
             <form>
               {fields

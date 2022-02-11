@@ -21,7 +21,7 @@ function App() {
     }
     // setElements(formJSON[0]);
   }, [formId]);
-  const { page_label, fields, form_language } = elements ?? {};
+  const { page_label, fields } = elements ?? {};
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -57,7 +57,6 @@ function App() {
       <>
         <div className="App container mt-5 ">
           <h1>{page_label}</h1>
-          <h2>Form Language is {form_language}</h2>
           <div className="col-md-6">
             <form>
               {fields

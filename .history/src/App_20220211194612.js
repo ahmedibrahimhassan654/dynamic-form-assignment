@@ -57,7 +57,7 @@ function App() {
       <>
         <div className="App container mt-5 ">
           <h1>{page_label}</h1>
-          <h2>Form Language is {form_language}</h2>
+          <h2></h2>
           <div className="col-md-6">
             <form>
               {fields
