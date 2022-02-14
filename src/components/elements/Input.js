@@ -30,7 +30,6 @@ const Input = ({
   };
   return (
     <div className="form-group">
-      <label htmlFor="exampleInputEmail1">{field_label}</label>
       {checklanguage()}
 
       <input
