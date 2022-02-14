@@ -21,20 +21,21 @@ function App() {
       console.log(err);
     }
     // setElements(formJSON[0]);
-  }, [formId, formLang]);
+  }, [formId]);
   const { page_label, fields, form_language } = elements ?? {};
+  const [form, setForm] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("handle submit happen", elements);
+    console.log("elements", elements.fields);
+    setForm((prev) => [...prev, elements.fields]);
   };
 
   const handleChange = (id, event) => {
     const newElements = { ...elements };
 
     newElements.fields.forEach((field) => {
-      const { field_id, field_type,field_mandatory } = field;
-
+      const { field_id, field_type, field_mandatory } = field;
       if (id === field_id) {
         switch (field_type) {
           case "checkbox":
@@ -72,7 +73,7 @@ function App() {
           </select>
           {JSON.stringify(formLang)}
           <div className="col-md-6">
-            <form class="row g-3" data-toggle="validator">
+            <form>
               {fields
                 ? fields.map((field, i) => <Element key={i} field={field} />)
                 : ""}
@@ -85,6 +86,11 @@ function App() {
               </button>
             </form>
           </div>
+        </div>
+
+        <div>
+          <h1>Form after submit</h1>
+          {JSON.stringify(form)}
         </div>
       </>
     </FormContext.Provider>

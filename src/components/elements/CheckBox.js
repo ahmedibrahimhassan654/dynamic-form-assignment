@@ -30,7 +30,11 @@ const CheckBox = ({
       <div className="form-check ">
         <input
           type="checkbox"
-          className="form-check-input"
+          className={
+            field_mandatory && field_value === false
+              ? "form-check-input is-invalid"
+              : "form-check-input "
+          }
           id="exampleCheck1"
           checked={field_value}
           onChange={(event) => handleChange(field_id, event)}
@@ -38,7 +42,7 @@ const CheckBox = ({
         <label className="form-check-label" htmlFor="exampleCheck1">
           {checklanguage()}
         </label>
-        {JSON.stringify(field_value)}
+        {JSON.stringify(field_mandatory)}
       </div>
     </>
   );

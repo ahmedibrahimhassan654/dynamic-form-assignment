@@ -34,9 +34,12 @@ const Select = ({
     <>
       {checklanguage()}
       <select
-        className="form-select mt-3"
+        className={
+          field_mandatory && field_value === ""
+            ? "form-control is-invalid"
+            : "form-control "
+        }
         aria-label="Default select example"
-        required={field_mandatory === "yes" ? true : false}
         onChange={(event) => handleChange(field_id, event)}
       >
         <option>
@@ -49,7 +52,7 @@ const Select = ({
             </option>
           ))}
       </select>
-      {JSON.stringify(field_label_Ar)}
+      {JSON.stringify(field_mandatory)}
     </>
   );
 };

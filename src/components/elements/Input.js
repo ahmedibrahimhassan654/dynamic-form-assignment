@@ -12,6 +12,7 @@ const Input = ({
 }) => {
   const { handleChange, formLang } = useContext(FormContext);
   // handleChange();
+  // const [field_mandatory, setfield_mandatory] = useState(field_mandatory);
 
   const checklanguage = () => {
     if (formLang === "Eng") {
@@ -34,19 +35,20 @@ const Input = ({
 
       <input
         type="text"
-        className="form-control"
+        className={
+          (field_mandatory && field_value === null) || field_value === ""
+            ? "form-control is-invalid"
+            : "form-control "
+        }
         id="exampleInputEmail1"
         aria-describedby="inputGroupPrepend"
         placeholder={
           formLang === "Eng" ? field_placeholder : field_placeholder_Ar
         }
         value={field_value}
-        // required={field_mandatory === true ? true : false}
         onChange={(event) => handleChange(field_id, event)}
-        required
       />
-
-      {JSON.stringify(field_mandatory)}
+      {JSON.stringify(`field_mandatory ${field_mandatory}`)}
     </div>
   );
 };
