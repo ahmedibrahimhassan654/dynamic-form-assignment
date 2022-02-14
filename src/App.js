@@ -9,7 +9,7 @@ function App() {
   const [elements, setElements] = useState(null);
 
   const [formId, setFormId] = useState("62054f4b1359de293fe8e149");
-  const [formLang, setformLang] = useState("eng");
+  const [formLang, setformLang] = useState("Eng");
 
   useEffect(() => {
     try {
@@ -21,7 +21,7 @@ function App() {
       console.log(err);
     }
     // setElements(formJSON[0]);
-  }, [formId]);
+  }, [formId, formLang]);
   const { page_label, fields, form_language } = elements ?? {};
 
   const handleSubmit = (event) => {
@@ -33,7 +33,7 @@ function App() {
     const newElements = { ...elements };
 
     newElements.fields.forEach((field) => {
-      const { field_id, field_type } = field;
+      const { field_id, field_type,field_mandatory } = field;
 
       if (id === field_id) {
         switch (field_type) {
@@ -54,7 +54,7 @@ function App() {
   };
 
   return (
-    <FormContext.Provider value={{ handleChange }}>
+    <FormContext.Provider value={{ handleChange, formLang }}>
       <>
         <div className="App container mt-5 ">
           <h1>{page_label}</h1>
@@ -67,14 +67,14 @@ function App() {
             }}
           >
             <option selected>edit form language</option>
-            <option value="eng">English</option>
-            <option value="ara">Arabic</option>
+            <option value="Eng">English</option>
+            <option value="Ar">Arabic</option>
           </select>
           {JSON.stringify(formLang)}
           <div className="col-md-6">
-            <form>
+            <form class="row g-3" data-toggle="validator">
               {fields
-                ? fields.map((field, i) => <Element key={i} field={field} formLang={formLang}/>)
+                ? fields.map((field, i) => <Element key={i} field={field} />)
                 : ""}
               <button
                 type="submit"
